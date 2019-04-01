@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getStockByLabel } from '../reducers/stocks';
 
 const mapStateToProps = (state, ownProps) => {
-  return {
-    ...state.entities.stocks.byLabel[ownProps.label]
-  };
+  return getStockByLabel(state, ownProps.label);
 };
 
 class StockTableRow extends Component {

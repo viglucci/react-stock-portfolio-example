@@ -7,6 +7,7 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './store/configureStore';
 import { newStockSale } from './actions';
+import { getLabelsList } from './reducers/stocks';
 
 const store = configureStore();
 
@@ -14,7 +15,7 @@ const updateInterval = 50;
 
 setInterval(() => {
   const state = store.getState();
-  const labels = state.entities.stocks.allLabels;
+  const labels = getLabelsList(state);
   const randomLabel = labels[Math.floor(Math.random() * labels.length)];
   store.dispatch(newStockSale({
     label: randomLabel,

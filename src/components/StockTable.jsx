@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import StockTableRow from './StockTableRow';
+import { getLabelsList } from '../reducers/stocks';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    labels: state.entities.stocks.allLabels
+    labels: getLabelsList(state)
   };
 };
 
@@ -21,14 +22,14 @@ class StockTable extends Component {
             <th>Latest Price</th>
           </tr>
         </thead>
-        <tbody>{labels.map((label) => {
-            return <StockTableRow key={label} label={label} />
-        })}</tbody>
+        <tbody>
+          {labels.map((label) => {
+            return <StockTableRow key={label} label={label} />;
+          })}
+        </tbody>
       </Table>
     );
   }
 }
 
-export default connect(
-  mapStateToProps
-)(StockTable);
+export default connect(mapStateToProps)(StockTable);
