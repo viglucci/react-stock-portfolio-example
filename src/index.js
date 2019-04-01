@@ -8,8 +8,7 @@ import * as serviceWorker from './serviceWorker';
 import configureStore from './store/configureStore';
 import { newStockPriceChange } from './actions';
 import { getLabelsList } from './reducers/stocks';
-import Chance from 'chance';
-const chance = new Chance(Math.random);
+import { getRandomStockPriceChange } from './utils';
 
 const store = configureStore();
 
@@ -22,7 +21,7 @@ setInterval(() => {
   store.dispatch(
     newStockPriceChange({
       label: randomLabel,
-      priceChange: chance.floating({ min: -1.00, max: 1.00 })
+      priceChange: getRandomStockPriceChange()
     })
   );
 }, updateInterval);
