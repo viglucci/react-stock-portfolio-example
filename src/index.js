@@ -6,21 +6,25 @@ import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './store/configureStore';
-import { newStockSale } from './actions';
+import { newStockPriceChange } from './actions';
 import { getLabelsList } from './reducers/stocks';
+import Chance from 'chance';
+const chance = new Chance(Math.random);
 
 const store = configureStore();
 
-const updateInterval = 50;
+const updateInterval = 10;
 
 setInterval(() => {
   const state = store.getState();
   const labels = getLabelsList(state);
   const randomLabel = labels[Math.floor(Math.random() * labels.length)];
-  store.dispatch(newStockSale({
-    label: randomLabel,
-    price: (Math.random() * 1000).toFixed(4)
-  }));
+  store.dispatch(
+    newStockPriceChange({
+      label: randomLabel,
+      priceChange: chance.floating({ min: -2.00, max: 2.00 })
+    })
+  );
 }, updateInterval);
 
 ReactDOM.render(

@@ -1,17 +1,17 @@
 import merge from 'lodash/merge';
-import { NEW_STOCK_SALE_ACTION } from '../actions';
+import { NEW_STOCK_PRICE_ACTION } from '../actions';
 
 const initialState = {
   byLabel: {
-    MSFT: { sales: 0, latestPrice: 0 },
-    AAPL: { sales: 0, latestPrice: 0 },
-    INTC: { sales: 0, latestPrice: 0 },
-    GOOG: { sales: 0, latestPrice: 0 },
-    FACE: { sales: 0, latestPrice: 0 },
-    LYFT: { sales: 0, latestPrice: 0 },
-    SIRI: { sales: 0, latestPrice: 0 },
-    AMZN: { sales: 0, latestPrice: 0 },
-    TWTR: { sales: 0, latestPrice: 0 }
+    MSFT: { sales: 0, price: 117.94 },
+    AAPL: { sales: 0, price: 189.95 },
+    INTC: { sales: 0, price: 53.70 },
+    GOOG: { sales: 0, price: 1173.31 },
+    FACE: { sales: 0, price: 166.69 },
+    LYFT: { sales: 0, price: 78.29 },
+    SIRI: { sales: 0, price: 5.67 },
+    AMZN: { sales: 0, price: 1780.75 },
+    TWTR: { sales: 0, price: 32.88 }
   },
   allLabels: [
     'MSFT',
@@ -45,19 +45,24 @@ const stocksReducer = (state = initialState, action) => {
 
   let newState = state;
 
-  if (action.type === NEW_STOCK_SALE_ACTION) {
-    const { label, price } = action.payload;
+  if (action.type === NEW_STOCK_PRICE_ACTION) {
+    const { label, priceChange } = action.payload;
     const stock = state.byLabel[label];
-    newState = {
-      ...state,
-      byLabel: {
-        ...state.byLabel,
-        [label]: {
-          sales: stock.sales + 1,
-          latestPrice: price
+    const newPrice = Number(stock.price) + Number(priceChange);
+    try {
+      newState = {
+        ...state,
+        byLabel: {
+          ...state.byLabel,
+          [label]: {
+            sales: stock.sales + 1,
+            price: newPrice.toFixed(2)
+          }
         }
-      }
-    };
+      };
+    } catch (e) {
+      debugger;
+    }
   }
 
   return newState;

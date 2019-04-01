@@ -1,14 +1,14 @@
-export const NEW_STOCK_SALE_ACTION = 'NEW_STOCK_SALE';
+export const NEW_STOCK_PRICE_ACTION = 'NEW_STOCK_SALE';
 
-export const newStockSale = ({
+export const newStockPriceChange = ({
     label,
-    price
+    priceChange
 }) => {
     return {
-        type: NEW_STOCK_SALE_ACTION,
+        type: NEW_STOCK_PRICE_ACTION,
         payload: {
             label,
-            price
+            priceChange: Number(priceChange)
         }
     };
 };

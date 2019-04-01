@@ -28,6 +28,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "chance": "^1.0.18",
     "normalizr": "^3.3.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"

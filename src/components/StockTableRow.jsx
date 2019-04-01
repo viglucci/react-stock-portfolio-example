@@ -8,12 +8,12 @@ const mapStateToProps = (state, ownProps) => {
 
 class StockTableRow extends Component {
   render() {
-    const { label, sales, latestPrice } = this.props;
+    const { label, sales, price } = this.props;
     return (
       <tr>
         <th scope="row">{label}</th>
         <td>{sales}</td>
-        <td>{latestPrice}</td>
+        <td>{price}</td>
       </tr>
     );
   }
