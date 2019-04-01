@@ -1,42 +1,50 @@
 import { NEW_STOCK_PRICE_ACTION } from '../actions';
 
 const initialState = {
-  byLabel: {
-    MSFT: {
-        label: 'MSFT',
-        shares: 1011
+  ordersById: {
+    '1': {
+      label: 'MSFT',
+      shares: 1011,
+      boughtPrice: 117.94
     },
-    TWTR: {
-        label: 'TWTR',
-        shares: 537
+    '2': {
+      label: 'MSFT',
+      shares: 456,
+      boughtPrice: 91.64
     },
+    '3': {
+      label: 'TWTR',
+      shares: 200,
+      boughtPrice: 32.88
+    },
+    '4': {
+      label: 'TWTR',
+      shares: 37,
+      boughtPrice: 17.84
+    }
   },
-  allLabels: [
-    'MSFT',
-    'TWTR'
-  ]
+  allOrders: ['1', '2', '3', '4']
 };
 
-export const getPortfolioLabelsList = (state) => {
-  return state.portfolio.allLabels;
+export const getPortfolioOrdersList = (state) => {
+  return state.portfolio.allOrders;
 };
 
-export const getPortfolioStocksByLabelMap = (state) => {
-  return state.portfolio.byLabel;
+export const getPortfolioOrdersListByLabel = (state) => {
+  return state.portfolio.ordersById;
 };
 
 export const getPortfolioStockByLabel = (state, label) => {
-  return getPortfolioStocksByLabelMap(state)[label];
+  return getPortfolioOrdersListByLabel(state)[label];
 };
 
 const portfolioReducer = (state = initialState, action) => {
-    let newState = state;
+  let newState = state;
 
-    if (action.type === NEW_STOCK_PRICE_ACTION) {
+  if (action.type === NEW_STOCK_PRICE_ACTION) {
+  }
 
-    }
-
-    return newState;
+  return newState;
 };
 
 export default portfolioReducer;

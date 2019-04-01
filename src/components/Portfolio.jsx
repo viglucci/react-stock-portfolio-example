@@ -2,28 +2,31 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import PortfolioTableRow from './PortfolioTableRow';
-import { getPortfolioLabelsList } from '../reducers/portfolio';
+import { getPortfolioOrdersList } from '../reducers/portfolio';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    labels: getPortfolioLabelsList(state)
+    orders: getPortfolioOrdersList(state)
   };
 };
 
 class Portfolio extends Component {
   render() {
-    const { labels } = this.props;
+    const { orders } = this.props;
     return (
       <Table>
         <thead>
           <tr>
             <th>Label</th>
             <th>Shares</th>
-            <th>Value</th>
+            <th>Bought Price</th>
+            <th>Initial Value</th>
+            <th>Current Value</th>
+            <th>Difference</th>
           </tr>
         </thead>
         <tbody>
-          {labels.map((label) => {
+          {orders.map((label) => {
             return <PortfolioTableRow key={label} label={label} />;
           })}
         </tbody>

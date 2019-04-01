@@ -18,7 +18,7 @@ class StockTable extends Component {
         <thead>
           <tr>
             <th>Label</th>
-            <th>Sales</th>
+            <th>Volume</th>
             <th>Latest Price</th>
           </tr>
         </thead>

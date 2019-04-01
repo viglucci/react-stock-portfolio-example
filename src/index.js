@@ -13,7 +13,7 @@ const chance = new Chance(Math.random);
 
 const store = configureStore();
 
-const updateInterval = 100;
+const updateInterval = 10;
 
 setInterval(() => {
   const state = store.getState();
@@ -22,7 +22,7 @@ setInterval(() => {
   store.dispatch(
     newStockPriceChange({
       label: randomLabel,
-      priceChange: chance.floating({ min: -2.00, max: 2.00 })
+      priceChange: chance.floating({ min: -1.00, max: 1.00 })
     })
   );
 }, updateInterval);
