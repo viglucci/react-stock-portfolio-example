@@ -13,7 +13,7 @@ const chance = new Chance(Math.random);
 
 const store = configureStore();
 
-const updateInterval = 10;
+const updateInterval = 100;
 
 setInterval(() => {
   const state = store.getState();

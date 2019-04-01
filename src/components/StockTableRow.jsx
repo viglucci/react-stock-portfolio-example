@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getStockByLabel } from '../reducers/stocks';
+import { formatCurrency } from '../utils';
 
 const mapStateToProps = (state, ownProps) => {
   return getStockByLabel(state, ownProps.label);
@@ -13,7 +14,7 @@ class StockTableRow extends Component {
       <tr>
         <th scope="row">{label}</th>
         <td>{sales}</td>
-        <td>{price}</td>
+        <td>{formatCurrency(price)}</td>
       </tr>
     );
   }

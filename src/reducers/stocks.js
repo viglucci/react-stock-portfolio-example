@@ -1,4 +1,3 @@
-import merge from 'lodash/merge';
 import { NEW_STOCK_PRICE_ACTION } from '../actions';
 
 const initialState = {
@@ -39,30 +38,22 @@ export const getStockByLabel = (state, label) => {
 };
 
 const stocksReducer = (state = initialState, action) => {
-  if (action.payload && action.payload.stocks) {
-    return merge({}, state, action.payload.stocks);
-  }
-
   let newState = state;
 
   if (action.type === NEW_STOCK_PRICE_ACTION) {
     const { label, priceChange } = action.payload;
     const stock = state.byLabel[label];
     const newPrice = Number(stock.price) + Number(priceChange);
-    try {
-      newState = {
-        ...state,
-        byLabel: {
-          ...state.byLabel,
-          [label]: {
-            sales: stock.sales + 1,
-            price: newPrice.toFixed(2)
-          }
+    newState = {
+      ...state,
+      byLabel: {
+        ...state.byLabel,
+        [label]: {
+          sales: stock.sales + 1,
+          price: newPrice.toFixed(2)
         }
-      };
-    } catch (e) {
-      debugger;
-    }
+      }
+    };
   }
 
   return newState;
