@@ -38,7 +38,22 @@ const initialState = {
       boughtPrice: 17.84
     })
   },
-  orderIdsList: ['1', '2', '3', '4']
+  orderIdsList: ['1', '2', '3', '4'],
+  initialValue: 0,
+  profit: 0,
+  value: 0
+};
+
+export const getPortfolioProfit = (state) => {
+  return state.portfolio.profit;
+};
+
+export const getPortfolioValue = (state) => {
+  return state.portfolio.value;
+};
+
+export const getPortfolioInitialValue = (state) => {
+  return state.portfolio.initialValue;
 };
 
 export const getPortfolioOrderMap = (state) => {
@@ -50,18 +65,13 @@ export const getPortfolioOrderIdsList = (state) => {
 };
 
 export const getPortfolioOrdersListByLabel = (state, label) => {
-  try {
-    const orderIdsList = getPortfolioOrderIdsList(state);
-    const orderByIdMap = getPortfolioOrderMap(state);
-    const orders = orderIdsList.map((id) => {
-      const order = orderByIdMap[id];
-      return order.label === label ? order : null;
-    });
-    return orders.filter(Boolean);
-  } catch (e) {
-    debugger;
-  }
-
+  const orderIdsList = getPortfolioOrderIdsList(state);
+  const orderByIdMap = getPortfolioOrderMap(state);
+  const orders = orderIdsList.map((id) => {
+    const order = orderByIdMap[id];
+    return order.label === label ? order : null;
+  });
+  return orders.filter(Boolean);
 };
 
 export const getPortfolioOrderById = (state, id) => {
@@ -73,10 +83,24 @@ export const getPortfolioStockByLabel = (state, label) => {
   return orders[label];
 };
 
+const calculatePortfolioAggregates = (ordersById) => {
+  let profit = 0;
+  let value = 0;
+  Object.keys(ordersById).forEach((id) => {
+    const order = ordersById[id];
+    profit += order.profit;
+    value += order.currentValue;
+  });
+  return {
+    profit,
+    value
+  };
+};
+
 const handleUpdateOrderValue = (state, action) => {
   const { id, currentValue, profit } = action.payload;
   const order = state.byId[id];
-  return {
+  const newState = {
     ...state,
     byId: {
       ...state.byId,
@@ -86,6 +110,13 @@ const handleUpdateOrderValue = (state, action) => {
         profit
       }
     }
+  };
+  const { profit: portfolioProfit, value: portfolioValue } = calculatePortfolioAggregates(newState.byId);
+  console.log(portfolioProfit)
+  return {
+    ...newState,
+    profit: portfolioProfit,
+    value: portfolioValue
   };
 };
 

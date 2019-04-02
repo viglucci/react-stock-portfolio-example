@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Table as BootstrapTable } from 'reactstrap';
 import TableRow from '../portfolio/TableRow';
+import TableFooter from '../portfolio/TableFooter';
 import { getPortfolioOrderIdsList } from '../../../reducers/portfolio/portfolio-reducer';
 
 const mapStateToProps = (state, ownProps) => {
@@ -30,6 +31,7 @@ class Table extends Component {
             return <TableRow key={id} id={id} />;
           })}
         </tbody>
+        <TableFooter />
       </BootstrapTable>
     );
   }
