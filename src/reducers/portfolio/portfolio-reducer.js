@@ -1,6 +1,6 @@
 import { UPDATE_ORDER_VALUE, NEW_ORDER } from '../../actions';
 
-function initOrder(order) {
+export function initOrder(order) {
   const value = (order.shares * order.boughtPrice).toFixed(4);
   const initialValue = Number(value);
   return {
@@ -10,39 +10,6 @@ function initOrder(order) {
     profit: 0
   };
 }
-
-const initialState = {
-  byId: {
-    '1': initOrder({
-      id: 1,
-      label: 'MSFT',
-      shares: 1011,
-      boughtPrice: 117.94
-    }),
-    '2': initOrder({
-      id: 2,
-      label: 'MSFT',
-      shares: 456,
-      boughtPrice: 91.64
-    }),
-    '3': initOrder({
-      id: 3,
-      label: 'TWTR',
-      shares: 200,
-      boughtPrice: 32.88
-    }),
-    '4': initOrder({
-      id: 4,
-      label: 'TWTR',
-      shares: 37,
-      boughtPrice: 17.84
-    })
-  },
-  orderIdsList: [1, 2, 3, 4],
-  initialValue: 0,
-  profit: 0,
-  value: 0
-};
 
 export const getPortfolioProfit = (state) => {
   return state.portfolio.profit;
@@ -146,7 +113,13 @@ const handleNewOrder = (state, action) => {
   return newState;
 };
 
-const portfolioReducer = (state = initialState, action) => {
+const portfolioReducer = (state = {
+  byId: {},
+  orderIdsList: [],
+  initialValue: 0,
+  profit: 0,
+  value: 0
+}, action) => {
   const { type: actionType } = action;
 
   if (actionType === UPDATE_ORDER_VALUE) {

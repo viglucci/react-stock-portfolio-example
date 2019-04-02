@@ -1,30 +1,5 @@
 import { UPDATE_STOCK_PRICE, STOCK_PRICE_FLUCTUATION } from '../../actions';
 
-const initialState = {
-  byLabel: {
-    MSFT: { label: 'MSFT', volume: 0, price: 117.94 },
-    AAPL: { label: 'AAPL', volume: 0, price: 189.95 },
-    INTC: { label: 'INTC', volume: 0, price: 53.7 },
-    GOOG: { label: 'GOOG', volume: 0, price: 1173.31 },
-    FACE: { label: 'FACE', volume: 0, price: 166.69 },
-    LYFT: { label: 'LYFT', volume: 0, price: 78.29 },
-    SIRI: { label: 'SIRI', volume: 0, price: 5.67 },
-    AMZN: { label: 'AMZN', volume: 0, price: 1780.75 },
-    TWTR: { label: 'TWTR', volume: 0, price: 32.88 }
-  },
-  allLabels: [
-    'MSFT',
-    'AAPL',
-    'INTC',
-    'GOOG',
-    'FACE',
-    'LYFT',
-    'SIRI',
-    'AMZN',
-    'TWTR'
-  ]
-};
-
 export const getLabelsList = (state) => {
   return state.stocks.allLabels;
 };
@@ -67,7 +42,10 @@ const handleUpdateStockPrice = (state, action) => {
   };
 };
 
-const stocksReducer = (state = initialState, action) => {
+const stocksReducer = (state = {
+  byLabel: {},
+  allLabels: []
+}, action) => {
   const { type: actionType } = action;
 
   if (actionType === STOCK_PRICE_FLUCTUATION) {

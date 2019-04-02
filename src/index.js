@@ -18,12 +18,14 @@ setInterval(() => {
   const state = store.getState();
   const labels = getLabelsList(state);
   const randomLabel = labels[Math.floor(Math.random() * labels.length)];
-  store.dispatch(
-    newStockPriceFluctuation({
-      label: randomLabel,
-      priceChange: getRandomStockPriceChange()
-    })
-  );
+  if (randomLabel) {
+    store.dispatch(
+      newStockPriceFluctuation({
+        label: randomLabel,
+        priceChange: getRandomStockPriceChange()
+      })
+    );
+  }
 }, updateInterval);
 
 ReactDOM.render(
