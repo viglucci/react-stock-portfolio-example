@@ -11,5 +11,5 @@ export const formatCurrency = (value) => {
 };
 
 export const getRandomStockPriceChange = () => {
-  return chance.floating({ min: -1.00, max: 1.00 });
+  return chance.floating({ min: -1.00, max: 2.00 });
 };

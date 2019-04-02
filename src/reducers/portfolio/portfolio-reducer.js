@@ -1,4 +1,4 @@
-import { UPDATE_ORDER_VALUE } from '../../actions';
+import { UPDATE_ORDER_VALUE, NEW_ORDER } from '../../actions';
 
 function initOrder(order) {
   const value = (order.shares * order.boughtPrice).toFixed(4);
@@ -38,7 +38,7 @@ const initialState = {
       boughtPrice: 17.84
     })
   },
-  orderIdsList: ['1', '2', '3', '4'],
+  orderIdsList: [1, 2, 3, 4],
   initialValue: 0,
   profit: 0,
   value: 0
@@ -111,8 +111,12 @@ const handleUpdateOrderValue = (state, action) => {
       }
     }
   };
-  const { profit: portfolioProfit, value: portfolioValue } = calculatePortfolioAggregates(newState.byId);
-  console.log(portfolioProfit)
+
+  const {
+    profit: portfolioProfit,
+    value: portfolioValue
+  } = calculatePortfolioAggregates(newState.byId);
+
   return {
     ...newState,
     profit: portfolioProfit,
@@ -120,11 +124,35 @@ const handleUpdateOrderValue = (state, action) => {
   };
 };
 
+const handleNewOrder = (state, action) => {
+  const orderId = state.orderIdsList.length + 1;
+  const orderIdsList = [...state.orderIdsList, orderId];
+  const { price, stock, volume } = action.payload;
+
+  const newState = {
+    ...state,
+    byId: {
+      ...state.byId,
+      [orderId]: initOrder({
+        id: orderId,
+        label: stock.label,
+        shares: volume,
+        boughtPrice: price
+      })
+    },
+    orderIdsList
+  };
+
+  return newState;
+};
+
 const portfolioReducer = (state = initialState, action) => {
   const { type: actionType } = action;
 
   if (actionType === UPDATE_ORDER_VALUE) {
     return handleUpdateOrderValue(state, action);
+  } else if (actionType === NEW_ORDER) {
+    return handleNewOrder(state, action);
   }
 
   return state;

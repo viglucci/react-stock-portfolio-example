@@ -2,15 +2,15 @@ import { UPDATE_STOCK_PRICE, STOCK_PRICE_FLUCTUATION } from '../../actions';
 
 const initialState = {
   byLabel: {
-    MSFT: { volume: 0, price: 117.94 },
-    AAPL: { volume: 0, price: 189.95 },
-    INTC: { volume: 0, price: 53.70 },
-    GOOG: { volume: 0, price: 1173.31 },
-    FACE: { volume: 0, price: 166.69 },
-    LYFT: { volume: 0, price: 78.29 },
-    SIRI: { volume: 0, price: 5.67 },
-    AMZN: { volume: 0, price: 1780.75 },
-    TWTR: { volume: 0, price: 32.88 }
+    MSFT: { label: 'MSFT', volume: 0, price: 117.94 },
+    AAPL: { label: 'AAPL', volume: 0, price: 189.95 },
+    INTC: { label: 'INTC', volume: 0, price: 53.7 },
+    GOOG: { label: 'GOOG', volume: 0, price: 1173.31 },
+    FACE: { label: 'FACE', volume: 0, price: 166.69 },
+    LYFT: { label: 'LYFT', volume: 0, price: 78.29 },
+    SIRI: { label: 'SIRI', volume: 0, price: 5.67 },
+    AMZN: { label: 'AMZN', volume: 0, price: 1780.75 },
+    TWTR: { label: 'TWTR', volume: 0, price: 32.88 }
   },
   allLabels: [
     'MSFT',
@@ -46,7 +46,7 @@ const handleStockPriceFluctuation = (state, action) => {
       ...state.byLabel,
       [label]: {
         ...stock,
-        volume: stock.volume + 1,
+        volume: stock.volume + 1
       }
     }
   };
@@ -61,7 +61,7 @@ const handleUpdateStockPrice = (state, action) => {
       ...state.byLabel,
       [label]: {
         ...stock,
-        price,
+        price
       }
     }
   };

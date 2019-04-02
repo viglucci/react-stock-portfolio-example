@@ -4,6 +4,7 @@ import { createLogger } from 'redux-logger';
 import rootReducer from '../reducers';
 import createSagaMiddleware from 'redux-saga';
 import stockSaga from '../sagas/stocks';
+import portfolioSaga from '../sagas/portfolio';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -21,6 +22,7 @@ const configureStore = (preloadedState) => {
     )
   );
 
+  sagaMiddleware.run(portfolioSaga);
   sagaMiddleware.run(stockSaga);
 
   if (module.hot) {

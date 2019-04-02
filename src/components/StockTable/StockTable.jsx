@@ -20,6 +20,9 @@ class StockTable extends Component {
             <th>Label</th>
             <th>Volume</th>
             <th>Latest Price</th>
+            <th>
+              Action
+            </th>
           </tr>
         </thead>
         <tbody>

@@ -12,7 +12,7 @@ import { getRandomStockPriceChange } from './utils';
 
 const store = configureStore();
 
-const updateInterval = 10;
+const updateInterval = 100;
 
 setInterval(() => {
   const state = store.getState();

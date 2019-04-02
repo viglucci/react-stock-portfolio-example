@@ -13,7 +13,10 @@ function* handleStockPriceFluctuation(action) {
   const { label: stockLabel, priceChange } = action.payload;
   const stock = getStockByLabel(state, stockLabel);
   const { price: currentPrice } = stock;
-  const newPrice = Number(currentPrice) + Number(priceChange);
+  let newPrice = Number(currentPrice) + Number(priceChange);
+  if (newPrice < 0) {
+    newPrice = 0;
+  }
   yield put(
     newStockPriceChange({
       label: stockLabel,
