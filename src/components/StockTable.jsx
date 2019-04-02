@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import StockTableRow from './StockTableRow';
-import { getLabelsList } from '../reducers/stocks';
+import { getLabelsList } from '../reducers/stocks/stocks-reducer';
 
 const mapStateToProps = (state, ownProps) => {
   return {

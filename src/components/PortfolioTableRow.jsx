@@ -1,26 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getPortfolioStockByLabel } from '../reducers/portfolio';
-import { getStockByLabel } from '../reducers/stocks';
+import { getPortfolioOrderById } from '../reducers/portfolio/portfolio-reducer';
 import { formatCurrency } from '../utils';
 
 const mapStateToProps = (state, ownProps) => {
-  const { label, shares, boughtPrice } = getPortfolioStockByLabel(
-    state,
-    ownProps.label
-  );
-  const stock = getStockByLabel(state, label);
-  const initialValue = shares * boughtPrice;
-  const currentValue = (Number(shares) * Number(stock.price)).toFixed(2);
-  const difference = currentValue - initialValue;
-  return {
-    label,
-    shares,
-    boughtPrice,
-    initialValue,
-    currentValue,
-    difference
-  };
+  const { id } = ownProps;
+  return getPortfolioOrderById(state, id);
 };
 
 class PortfolioTableRow extends Component {
@@ -31,7 +16,7 @@ class PortfolioTableRow extends Component {
       boughtPrice,
       initialValue,
       currentValue,
-      difference
+      profit
     } = this.props;
     return (
       <tr>
@@ -40,7 +25,7 @@ class PortfolioTableRow extends Component {
         <td>{formatCurrency(boughtPrice)}</td>
         <td>{formatCurrency(initialValue)}</td>
         <td>{formatCurrency(currentValue)}</td>
-        <td>{formatCurrency(difference)}</td>
+        <td>{formatCurrency(profit)}</td>
       </tr>
     );
   }

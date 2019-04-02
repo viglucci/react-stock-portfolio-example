@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import PortfolioTableRow from './PortfolioTableRow';
-import { getPortfolioOrdersList } from '../reducers/portfolio';
+import { getPortfolioOrderIdsList } from '../reducers/portfolio/portfolio-reducer';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    orders: getPortfolioOrdersList(state)
+    orders: getPortfolioOrderIdsList(state)
   };
 };
 
@@ -22,12 +22,12 @@ class Portfolio extends Component {
             <th>Bought Price</th>
             <th>Initial Value</th>
             <th>Current Value</th>
-            <th>Difference</th>
+            <th>Profit</th>
           </tr>
         </thead>
         <tbody>
-          {orders.map((label) => {
-            return <PortfolioTableRow key={label} label={label} />;
+          {orders.map((id) => {
+            return <PortfolioTableRow key={id} id={id} />;
           })}
         </tbody>
       </Table>

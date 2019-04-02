@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getStockByLabel } from '../reducers/stocks';
+import { getStockByLabel } from '../reducers/stocks/stocks-reducer';
 import { formatCurrency } from '../utils';
 
 const mapStateToProps = (state, ownProps) => {
@@ -9,11 +9,11 @@ const mapStateToProps = (state, ownProps) => {
 
 class StockTableRow extends Component {
   render() {
-    const { label, sales, price } = this.props;
+    const { label, volume, price } = this.props;
     return (
       <tr>
         <th scope="row">{label}</th>
-        <td>{sales}</td>
+        <td>{volume}</td>
         <td>{formatCurrency(price)}</td>
       </tr>
     );

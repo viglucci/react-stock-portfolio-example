@@ -6,8 +6,8 @@ import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './store/configureStore';
-import { newStockPriceChange } from './actions';
-import { getLabelsList } from './reducers/stocks';
+import { newStockPriceFluctuation } from './actions';
+import { getLabelsList } from './reducers/stocks/stocks-reducer';
 import { getRandomStockPriceChange } from './utils';
 
 const store = configureStore();
@@ -19,7 +19,7 @@ setInterval(() => {
   const labels = getLabelsList(state);
   const randomLabel = labels[Math.floor(Math.random() * labels.length)];
   store.dispatch(
-    newStockPriceChange({
+    newStockPriceFluctuation({
       label: randomLabel,
       priceChange: getRandomStockPriceChange()
     })
