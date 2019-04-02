@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getPortfolioOrderById } from '../reducers/portfolio/portfolio-reducer';
-import { formatCurrency } from '../utils';
+import { getPortfolioOrderById } from '../../../reducers/portfolio/portfolio-reducer';
+import { formatCurrency } from '../../../utils';
 
 const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps;
   return getPortfolioOrderById(state, id);
 };
 
-class PortfolioTableRow extends Component {
+class TableRow extends Component {
   render() {
     const {
       label,
@@ -31,4 +31,4 @@ class PortfolioTableRow extends Component {
   }
 }
 
-export default connect(mapStateToProps)(PortfolioTableRow);
+export default connect(mapStateToProps)(TableRow);

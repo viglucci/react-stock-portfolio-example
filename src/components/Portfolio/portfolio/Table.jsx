@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Table } from 'reactstrap';
-import PortfolioTableRow from './PortfolioTableRow';
-import { getPortfolioOrderIdsList } from '../reducers/portfolio/portfolio-reducer';
+import { Table as BootstrapTable } from 'reactstrap';
+import TableRow from '../portfolio/TableRow';
+import { getPortfolioOrderIdsList } from '../../../reducers/portfolio/portfolio-reducer';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -10,11 +10,11 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-class Portfolio extends Component {
+class Table extends Component {
   render() {
     const { orders } = this.props;
     return (
-      <Table>
+      <BootstrapTable>
         <thead>
           <tr>
             <th>Label</th>
@@ -27,12 +27,12 @@ class Portfolio extends Component {
         </thead>
         <tbody>
           {orders.map((id) => {
-            return <PortfolioTableRow key={id} id={id} />;
+            return <TableRow key={id} id={id} />;
           })}
         </tbody>
-      </Table>
+      </BootstrapTable>
     );
   }
 }
 
-export default connect(mapStateToProps)(Portfolio);
+export default connect(mapStateToProps)(Table);

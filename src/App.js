@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import StockTable from './components/StockTable.jsx';
-import Portfolio from './components/Portfolio.jsx';
+import StockTable from './components/StockTable/StockTable.jsx';
+import Portfolio from './components/Portfolio/Portfolio.jsx';
 
 class App extends Component {
   render() {
